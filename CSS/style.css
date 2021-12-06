@@ -66,10 +66,8 @@ h1 {
     box-shadow: 2px 2px 5px 1px rgba(23, 68, 12, 0.205);
 }
 
-.verdeClaro {
-    background-color: #acd754;
-}
-
-.verdeEscuro {
-    background-color: #A4CF49;
-}
+.grama1 {background-color: #acd754;}
+.grama2 {background-color: #A4CF49;}
+.terra1 {background-color: #e4c0a0;}
+.terra2 {background-color: #d9b899}
+.vermelho {background-color: red}
