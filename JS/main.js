@@ -12,7 +12,7 @@ var bandeiraAtiva = false;
 //Cronometro
 var segundos = 0;
 function incrementSeconds() {
-    if (iniciou == true) {
+    if (iniciou == true && segundos < 999) {
         segundos++; 
     }
     document.getElementById('tempo').innerText =  segundos;
@@ -101,7 +101,10 @@ function cavar(posicao) {
         }
     
         posicao.innerHTML = "<h1>" + campo[numPosicao.indexOf(posicao.id)] + "</h1>";
-        verifica(posicao);
+
+        if(campo[numPosicao.indexOf(posicao.id)] == "") {
+            verifica(posicao);
+        }
     }
 }
 
