@@ -5,9 +5,17 @@ var numPosicao = [tamanhoTotal];
 var campo = [tamanhoTotal];
 var bombas = [tamanhoTotal];
 var bandeiras = []
-var numBombas = tamanho;
-var ordemExecucao = [];
 var iniciou = false;
+
+//Cronometro
+var segundos = 0;
+function incrementSeconds() {
+    if (iniciou == true) {
+        segundos++; 
+    }
+    document.getElementById('tempo').innerText =  segundos;
+}
+ setInterval(incrementSeconds, 1000);
 
 function criaCampo() {
     const grama1 = ["grama1", "grama2"];
@@ -70,10 +78,11 @@ function colocaBombas() {
         console.log(index + " = " + campo[index]);
     }
 
-    document.querySelector("#numBombas").innerHTML = numBombas;
+    document.querySelector("#numBombas").innerHTML = tamanho;
 }
 
 function cavar(posicao) {
+    if (iniciou == false) {iniciou = true;}
     mudaCor(posicao);
 
     let numeroCampo =  campo[numPosicao.indexOf(posicao.id)].includes("X")
@@ -82,11 +91,10 @@ function cavar(posicao) {
         posicao.classList.add("vermelho");
         numBombas -= 1
         bandeiras.push(posicao.id);
-        document.querySelector("#numBombas").innerHTML = numBombas;
+        document.querySelector("#numBombas").innerHTML = tamanho;
     }
 
     posicao.innerHTML = "<h1>" + campo[numPosicao.indexOf(posicao.id)] + "</h1>";
-
     verifica(posicao);
 }
 
@@ -99,9 +107,8 @@ function cavar2(posicao) {
         posicao.classList.add("vermelho");
         numBombas -= 1
         bandeiras.push(posicao.id);
-        document.querySelector("#numBombas").innerHTML = numBombas;
+        document.querySelector("#numBombas").innerHTML = tamanho;
     }
-
     posicao.innerHTML = "<h1>" + campo[numPosicao.indexOf(posicao.id)] + "</h1>";
 }
 
@@ -121,7 +128,6 @@ function verifica(posicao) {
     verifica2(letraAnterior + (parseInt(numero)+1));
     verifica2(letra + (parseInt(numero)+1));
     verifica2(letraPosterior + (parseInt(numero)+1));
-    //if(campo[numPosicao.indexOf(posicaoNova)] == "") {cavar(document.querySelector("#" + posicaoNova));}
 }
 
 function verifica2(posicao) {
@@ -130,9 +136,7 @@ function verifica2(posicao) {
     && !document.querySelector("#" + posicao).classList.contains("terra2")) {
         cavar(document.querySelector("#" + posicao));
     }
-    if (campo[numPosicao.indexOf(posicao)] == "1"
-        || campo[numPosicao.indexOf(posicao)] == "2"
-        || campo[numPosicao.indexOf(posicao)] == "3") {
+    if (!isNaN(campo[numPosicao.indexOf(posicao)])) {
         cavar2(document.querySelector("#" + posicao));
     }
 }
