@@ -182,7 +182,7 @@ function fimDeJogo() {
     const fimDeJogo = document.querySelector("#fim-de-jogo");
     fimDeJogo.classList.add("fim-de-jogo")
     if (pontos == tamanhoTotal - tamanho) {
-        fimDeJogo.innerHTML = "<h1>Prabens você ganhou!</h1> <button id='reiniciar' onclick='reiniciar()'></button>";  
+        fimDeJogo.innerHTML = "<h1>Prabens você ganhou!</h1> <button id='reiniciar' onclick='reiniciar()'>Reiniciar</button>";  
     } else {
         fimDeJogo.innerHTML = "<h1>Você perdeu!</h1> <button id='reiniciar' onclick='reiniciar()'>Reiniciar</button>";
     }
