@@ -5,6 +5,7 @@ var numPosicao = [tamanhoTotal];
 var campo = [tamanhoTotal];
 var bombas = [tamanhoTotal];
 var numBombas = tamanho;
+var pontos = 0;
 var bandeiras = []
 var iniciou = false;
 var bandeiraAtiva = false;
@@ -94,10 +95,10 @@ function cavar(posicao) {
         mudaCor(posicao);
 
         if (numeroCampo == true && bandeiras.includes(posicao.id) == false) {
-            console.log("Booom!");
             posicao.classList.remove("bandeira");
             posicao.classList.add("vermelho");
             bandeiras.push(posicao.id);
+            fimDeJogo();
         }
     
         posicao.innerHTML = "<h1>" + campo[numPosicao.indexOf(posicao.id)] + "</h1>";
@@ -153,10 +154,14 @@ function mudaCor(posicao) {
     if (posicao.classList.contains("grama1")) {
         posicao.classList.remove("grama1");
         posicao.classList.add("terra1");
+        pontos++;
     } if (posicao.classList.contains("grama2")) {
         posicao.classList.remove("grama2");
         posicao.classList.add("terra2");
+        pontos++;
     }
+    console.log("Pontos: " + pontos);
+    if (pontos == tamanhoTotal - tamanho) {fimDeJogo()}
 }
 
 function trocar() {
@@ -171,4 +176,19 @@ function trocar() {
         x.classList.add("bandeira");
         bandeiraAtiva = false;
     }
+}
+
+function fimDeJogo() {
+    const fimDeJogo = document.querySelector("#fim-de-jogo");
+    fimDeJogo.classList.add("fim-de-jogo")
+    if (pontos == tamanhoTotal - tamanho) {
+        fimDeJogo.innerHTML = "<h1>Prabens você ganhou!</h1> <button id='reiniciar' onclick='reiniciar()'></button>";  
+    } else {
+        fimDeJogo.innerHTML = "<h1>Você perdeu!</h1> <button id='reiniciar' onclick='reiniciar()'>Reiniciar</button>";
+    }
+    iniciou = false;
+}
+
+function reiniciar() {
+    window.location.reload();
 }
